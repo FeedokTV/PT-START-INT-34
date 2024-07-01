@@ -1,0 +1,15 @@
+# Пример compose файла
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  server:
+    build:
+        context: ./
+        dockerfile: Dockerfile
+    restart: on-failure:10
+    networks:
+      - default

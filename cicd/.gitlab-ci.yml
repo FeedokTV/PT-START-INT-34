@@ -1,0 +1,21 @@
+# Пример пайплайна ci
+stages:
+  - build
+  - test
+
+variables:
+  IMAGE_NAME: test-flask-app
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_NAME .
+  only:
+    - main
+
+test:
+  stage: test
+  script:
+    - docker run --rm $IMAGE_NAME python -m unittest discover -s tests
+  only:
+    - main
